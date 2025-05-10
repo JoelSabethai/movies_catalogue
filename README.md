@@ -102,8 +102,16 @@ To deploy your projects, you can use any hosting provider, such as [Render](http
 - Finally, click the **"Deploy Static Site"** button.
 - Copy the URL where the web application was deployed.
 
-
 ### Note
+
+In the website configuration, go to **MANAGE - Redirects/Rewrites**.
+
+Add the following rule:
+    - Source: `/*`.
+    - Destination: `/index.html`.
+    - Action: `Rewrite`.
+
+## Update API or Web
 
 If you need to update the API or the web app, go to the dashboard **Settings** and click on **Projects**:
 - In the list of active services, choose the one you want to update.
