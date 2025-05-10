@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
   canActivate(): boolean {
     const token = this.authService.getToken();
 
-    if (token) {
+    if (token && token.trim().length) {
       return true;
     } else {
       this.router.navigate(['/auth/login']); // redirect if not exist session (token)
