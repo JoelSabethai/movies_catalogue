@@ -24,9 +24,6 @@ export class JwtInterceptor implements HttpInterceptor {
                     Authorization: `Bearer ${jwt}`
                 }
             })
-        } else if(!jwt && !jwt.trim().length) {
-            this.router.navigate(['/auth/login']);
-            return EMPTY;
         }
 
         return next.handle(req)
