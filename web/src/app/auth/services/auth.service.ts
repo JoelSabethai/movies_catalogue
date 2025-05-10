@@ -86,7 +86,7 @@ export class AuthService {
 
   // Method to get token of current session
   getToken() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') ?? '';
     return token;
   }
 
