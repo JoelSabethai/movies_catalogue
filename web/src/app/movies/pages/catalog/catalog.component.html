@@ -1,0 +1,33 @@
+<div class="w-full h-full min-h-screen bg-gray-900 pt-20">
+    <section class="container mx-auto py-8 flex flex-col gap-y-8">
+        <section class="w-full flex flex-col md:flex-row gap-8 md:gap-0 justify-between items-center max-w-screen-xl mx-auto">
+            <h1 class="text-white text-3xl md:text-4xl lg:text-5xl">Catalogo de películas</h1>
+
+            <input-search (search)="onSearch($event)"></input-search>
+        </section>
+
+        <section class="w-full p-5 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-5 sm:gap-8 md:gap-10 lg:gap-16 justify-items-center max-w-screen-xl mx-auto">
+            <ng-container *ngFor="let movie of movies | paginate: { itemsPerPage: itemsPerPage, currentPage: page, totalItems: totalMovies }" >
+                <card-movie 
+                    [id]="movie.id" 
+                    [imageUrl]="configImages.base_url + configImages.backdrop_sizes[0] + movie.poster_path" 
+                    [title]="movie.title" 
+                    [isFavorite]="movie.favorite"
+                    (favoriteAdded)="handleAddToFavorite($event)"
+                    (favoriteRemoved)="handleRemoveFromFavorite($event)"
+                ></card-movie>
+            </ng-container>
+        </section>
+
+        <pagination-controls
+            class="pagination-control"
+            previousLabel="Anterior"
+            nextLabel="Siguiente"
+            [responsive]="true"
+            [maxSize]="7"
+            [autoHide]="true"
+            (pageChange)="changedPage($event)"
+            (pageBoundsCorrection)="changedPage($event)"
+        ></pagination-controls>
+    </section>
+</div>

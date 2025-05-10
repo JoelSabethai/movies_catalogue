@@ -1,0 +1,14 @@
+<button 
+    class="w-full h-10 rounded-lg text-white"
+    [class]="class"
+    [ngClass]="{
+        'bg-red-600': type === 'primary',
+        'hover:bg-red-700': type === 'primary',
+        'bg-gray-600': type === 'secondary',
+        'hover:bg-gray-700': type === 'secondary'
+    }"
+    [attr.type]="buttonType || 'button'"
+    [routerLink]="redirectTo"
+>
+    {{ text }}
+</button>

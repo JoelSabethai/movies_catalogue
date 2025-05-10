@@ -1,0 +1,23 @@
+# Use the official Node.js image
+FROM node:20
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Install global tools
+RUN npm install -g nodemon ts-node typescript
+
+# Copy package.json and package-lock.json first to install dependencies
+COPY ./api/package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the API code
+COPY ./api ./
+
+# Compila el proyecto TypeScript
+RUN npm run build
+
+# The container will listen on the port defined in the .env file for the API
+CMD ["npm", "start"]

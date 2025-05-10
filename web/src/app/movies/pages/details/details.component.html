@@ -1,0 +1,73 @@
+<div class="w-full h-full min-h-screen bg-gray-900 pt-20">
+    <section class="container mx-auto p-8 flex flex-col gap-y-8 max-w-screen-xl">
+        <article class="flex gap-5">
+            <div *ngIf="configImages && movie" class="relative w-1/2 lg:w-1/3 h-auto hidden md:block">
+                <figure class="w-full h-full" style="aspect-ratio: 9/16;">
+                    <img class="w-full h-full bg-cover bg-center" [src]="configImages.base_url + configImages.backdrop_sizes[0] + movie.poster_path" [alt]="'movie' + movieId">
+                </figure>
+
+                <button
+                    *ngIf="!movie.favorite"
+                    type="button"
+                    class="absolute top-3 right-3 transform text-red-700 focus:outline-none"
+                    (click)="addToFavorite()"
+                >
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+
+                <button
+                    *ngIf="movie.favorite"
+                    type="button"
+                    class="absolute top-3 right-3 text-red-700 focus:outline-none group"
+                    (click)="removeFromFavorite()"
+                >
+                    <div class="relative">
+                        <i class="fa-solid fa-heart absolute top-0 right-0 group-hover:opacity-0 transition-opacity duration-200"></i>
+
+                        <i class="fa-solid fa-heart-crack absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                    </div>
+                </button>
+            </div>
+
+            <section *ngIf="movie" class="w-full flex flex-col gap-8">
+                <section class="flex flex-col gap-1.5">
+                    <h1 class="text-white mb-2">{{ movie.title }}</h1>
+                    <span class="text-white text-xs md:text-base">Fecha de estreno: {{ movie.release_date }}</span>
+                    <span class="text-white text-xs md:text-base">Géneros: {{ getGenres(movie.genres) }}</span>
+                </section>
+
+                <section class="flex flex-col sm:flex-row gap-3">
+                    <div *ngIf="configImages && movie" class="relative w-72 mx-auto sm:mx-0 sm:w-80 md:w-96 h-auto block md:hidden">
+                        <figure class="w-full h-full" style="aspect-ratio: 9/16;">
+                            <img class="w-full h-full bg-cover bg-center" [src]="configImages.base_url + configImages.backdrop_sizes[0] + movie.poster_path" [alt]="'movie' + movieId">
+                        </figure>
+        
+                        <button
+                            *ngIf="!movie.favorite"
+                            type="button"
+                            class="absolute top-3 right-3 transform text-red-700 focus:outline-none"
+                            (click)="addToFavorite()"
+                        >
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+        
+                        <button
+                            *ngIf="movie.favorite"
+                            type="button"
+                            class="absolute top-3 right-3 text-red-700 focus:outline-none group"
+                            (click)="removeFromFavorite()"
+                        >
+                            <div class="relative">
+                                <i class="fa-solid fa-heart absolute top-0 right-0 group-hover:opacity-0 transition-opacity duration-200"></i>
+        
+                                <i class="fa-solid fa-heart-crack absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            </div>
+                        </button>
+                    </div>
+
+                    <p class="w-full text-white text-base md:text-lg">{{ movie.overview }}</p>
+                </section>
+            </section>
+        </article>
+    </section>
+</div>

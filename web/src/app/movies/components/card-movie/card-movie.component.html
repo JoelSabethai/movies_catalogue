@@ -1,0 +1,33 @@
+<a [routerLink]="['/movies/details', id]">
+    <article class="relative w-32 h-48 sm:w-40 sm:h-56 md:w-44 md:h-60 lg:w-48 lg:h-72 transform transition-transform duration-300 hover:scale-110 cursor-pointer">
+        <figure class="w-full h-full absolute z-0">
+            <img class="w-full h-full bg-cover bg-center" [src]="imageUrl" [alt]="'movie-' + id">
+        </figure>
+
+        <article class="absolute bottom-0 w-full h-14 md:h-16 lg:h-20 bg-black bg-opacity-80 p-3 flex items-center justify-center">
+            <p class="text-white text-xs sm:text-sm md:text-base text-center">{{title}}</p>
+        </article>
+
+        <button
+            *ngIf="!isFavorite"
+            type="button"
+            class="absolute top-3 right-3 transform text-red-700 focus:outline-none"
+            (click)="addToFavorite(id); $event.preventDefault(); $event.stopPropagation()"
+        >
+            <i class="fa-regular fa-heart"></i>
+        </button>
+
+        <button
+            *ngIf="isFavorite"
+            type="button"
+            class="absolute top-3 right-3 text-red-700 focus:outline-none group"
+            (click)="removeFromFavorite(id); $event.preventDefault(); $event.stopPropagation()"
+        >
+            <div class="relative">
+                <i class="fa-solid fa-heart absolute top-0 right-0 group-hover:opacity-0 transition-opacity duration-200"></i>
+
+                <i class="fa-solid fa-heart-crack absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+            </div>
+        </button>
+    </article>
+</a>

@@ -1,0 +1,23 @@
+services:
+  api:
+    environment:
+        - NODE_ENV=development
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    command: npm run dev
+
+  frontend:
+    build:
+      context: .
+      dockerfile: web/Dockerfile.dev
+    environment:
+        - NODE_ENV=development
+    volumes:
+      - ./web:/app
+      - /app/node_modules
+    ports:
+      - "4200:4200"
+    command: npm start

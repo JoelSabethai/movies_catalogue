@@ -1,0 +1,84 @@
+<section class="bg-white bg-opacity-70 p-8 md:p-12 rounded-lg shadow flex flex-col justify-evenly items-center w-full min-w-full md:min-w-1 lg:min-w-2 min-h-full md:min-h-1 max-w-4/5 mx-auto md:max-w-full">
+    <h1 class="text-3xl md:text-4xl lg:text-5xl mb-8">Registrarse</h1>
+
+    <form class="w-full flex flex-col items-center gap-3" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group w-full">
+            <input
+                class="h-10 w-full rounded-lg px-3 py-1 border border-solid text-sm shadow-sm focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring"
+                type="email"
+                placeholder="Correo electrónico"
+                autocomplete="off"
+                formControlName="email"
+                [ngClass]="{
+                    'border-red-600': f.email.errors && f.email.touched && f.email.invalid
+                }"
+            >
+            <div *ngIf="f.email.errors && f.email.touched && f.email.invalid" class="text-red-600 text-xs">
+                <div *ngIf="f.email.errors.required">Correo electrónico es requerido</div>
+                <div *ngIf="f.email.errors.email">Correo electrónico invalido</div>
+            </div>
+        </div>
+
+        <div class="form-group w-full">
+            <div class="relative">
+                <input
+                    class="h-10 w-full rounded-lg px-3 py-1 border border-solid text-sm shadow-sm focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring"
+                    [type]="showPassword ? 'text' : 'password'"
+                    placeholder="Contraseña"
+                    autocomplete="off"
+                    formControlName="password"
+                    [ngClass]="{
+                        'border-red-600': f.password.errors && f.password.touched && f.password.invalid
+                    }"
+                >
+                <button
+                    type="button"
+                    class="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500 focus:outline-none"
+                    (click)="togglePasswordVisibility(false)"
+                >
+                    <i *ngIf="showPassword" class="fa-regular fa-eye-slash"></i>
+                    <i *ngIf="!showPassword" class="fa-regular fa-eye"></i>
+                </button>
+            </div>
+            <div *ngIf="f.password.errors && f.password.touched && f.password.invalid" class="text-red-600 text-xs">
+                <div *ngIf="f.password.errors.required && !f.password.value">Contraseña es requerida</div>
+                <div *ngIf="f.password.errors.minlength && f.password.value">La contraseña debe ser de al menos 8 caracteres</div>
+                <div *ngIf="f.password.errors.maxlength && f.password.value">La contraseña debe ser de máximo 20 caracteres</div>
+                <div *ngIf="f.password.errors.weakPassword && f.password.value">La contraseña debe contener mayúsculas, minúsculas, número y símbolo</div>
+            </div>
+        </div>
+
+        <div class="form-group w-full">
+            <div class="relative">
+                <input
+                    class="h-10 w-full rounded-lg px-3 py-1 border border-solid text-sm shadow-sm focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring"
+                    [type]="showPasswordValidate ? 'text' : 'password'"
+                    placeholder="Confirmar contraseña"
+                    autocomplete="off"
+                    formControlName="passwordValidate"
+                    [ngClass]="{
+                        'border-red-600': f.passwordValidate.errors && f.passwordValidate.touched && f.passwordValidate.invalid
+                    }"
+                >
+                <button
+                    type="button"
+                    class="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500 focus:outline-none"
+                    (click)="togglePasswordVisibility(true)"
+                >
+                    <i *ngIf="showPasswordValidate" class="fa-regular fa-eye-slash"></i>
+                    <i *ngIf="!showPasswordValidate" class="fa-regular fa-eye"></i>
+                </button>
+            </div>
+            <div *ngIf="f.passwordValidate.errors && f.passwordValidate.touched && f.passwordValidate.invalid" class="text-red-600 text-xs">
+                <div *ngIf="f.passwordValidate.errors.required && !f.passwordValidate.value">Confirmación de contraseña es requerida</div>
+                <div *ngIf="f.passwordValidate.errors.passwordsMismatch && f.passwordValidate.value">Las contraseñas no coinciden</div>
+            </div>
+        </div>
+
+        <button-component class="w-full" type="primary" buttonType="submit" text="Registrarse"></button-component>
+        
+        <span class="text-base md:text-lg lg:text-xl">O</span>
+        
+        <button-component class="w-full" type="secondary" text="Iniciar sesión" redirectTo="/auth/login"></button-component>
+    </form>
+</section>
