@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
 ) {}
 
   canActivate(): boolean | UrlTree {
-    const token = this.authService.getToken();
+    const token = this.authService.getToken() as string;
     return token && token.trim().length
       ? true
       : this.router.parseUrl('/auth/login'); // redirect if not exist session (token)
