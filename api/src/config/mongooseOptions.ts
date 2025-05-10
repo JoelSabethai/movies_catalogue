@@ -51,7 +51,7 @@ export const connectOptions: ConnectOptions = {
 const mongoURI = (options: MongoDBOptions) => {
   const { mongo_uri, dbName, host, port, username, password } = options;
 
-  if(mongo_uri) return mongo_uri;
+  if(mongo_uri && mongo_uri.trim().length) return mongo_uri;
   else {
     const credentials = username && password ? `${username}:${password}@` : '';
     const portStr = port ? `:${port}` : '';
