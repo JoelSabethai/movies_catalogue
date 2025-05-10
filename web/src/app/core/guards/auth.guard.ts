@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router, UrlTree  } from '@angular/router';
 import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable({
@@ -11,14 +11,10 @@ export class AuthGuard implements CanActivate {
     private router: Router
 ) {}
 
-  canActivate(): boolean {
+  canActivate(): boolean | UrlTree {
     const token = this.authService.getToken();
-
-    if (token && token.trim().length) {
-      return true;
-    } else {
-      this.router.navigate(['/auth/login']); // redirect if not exist session (token)
-      return false;
-    }
+    return token && token.trim().length
+      ? true
+      : this.router.parseUrl('/auth/login'); // redirect if not exist session (token)
   }
 }
