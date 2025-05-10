@@ -9,6 +9,9 @@ This project contains a full-stack application with:
 - Node.js 20 backend (API)
 - MongoDB database (MongoDB Atlas)
 
+**Video demo web site**
+- [Video demo](https://youtu.be/RP6C9RRC_tM)
+
 ## Project Structure
 
 ```
