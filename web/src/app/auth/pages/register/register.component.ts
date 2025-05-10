@@ -13,6 +13,7 @@ export class RegisterComponent {
   @HostBinding('class') class = 'w-full md:w-auto';
 
   form: FormGroup;
+  submitted: boolean = false;
 
   showPassword: boolean = false;
   showPasswordValidate: boolean = false;
@@ -65,14 +66,18 @@ export class RegisterComponent {
   onSubmit() {
     if(this.form.invalid) return;
 
+    this.submitted = true;
+
     const { email, password } = this.form.value;
 
     this.authService.register(email, password).subscribe(
       (response) => {
+        this.submitted = false;
         this.authService.setToken(response.data.jwt);
         this.router.navigate(['/movies']);
       },
       (error) => {
+        this.submitted = false;
         this.toastr.error(error);
       }
     );

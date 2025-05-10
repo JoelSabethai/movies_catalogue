@@ -50,10 +50,10 @@
             </div>
         </div>
 
-        <button-component class="w-full" type="primary" buttonType="submit" text="Iniciar sesión"></button-component>
+        <button-component class="w-full" type="primary" buttonType="submit" text="Iniciar sesión" [isLoading]="submitted" [disabled]="submitted"></button-component>
 
         <span class="text-base md:text-lg lg:text-xl">O</span>
 
-        <button-component class="w-full" type="secondary" text="Registrase" redirectTo="/auth/register"></button-component>
+        <button-component class="w-full" type="secondary" text="Registrase" redirectTo="/auth/register" [disabled]="submitted"></button-component>
     </form>
 </section>

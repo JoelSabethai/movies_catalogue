@@ -10,4 +10,6 @@ export class ButtonComponent {
     @Input() text!: string;
     @Input() class!: string;
     @Input() redirectTo!: string;
+    @Input() isLoading: boolean = false;
+    @Input() disabled: boolean = false;
 }
